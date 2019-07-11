@@ -1,9 +1,11 @@
 package com.qualityhouse.course.automation.datadriventesting.tests;
 
 import com.qualityhouse.course.automation.datadriventesting.pageobjects.CommonPageObjects;
+import com.qualityhouse.course.automation.datadriventesting.pageobjects.EditProfilePageObject;
 import com.qualityhouse.course.automation.datadriventesting.pageobjects.LoginPageObject;
 import com.qualityhouse.course.automation.datadriventesting.support.User;
 import com.qualityhouse.course.automation.datadriventesting.support.Utils;
+import com.qualityhouse.course.automation.datadriventesting.testdata.EditProfileTestData;
 import com.qualityhouse.course.automation.datadriventesting.testdata.LoginTestData;
 import org.junit.After;
 import org.junit.Before;
@@ -20,6 +22,8 @@ public class EditProfile {
 
     private CommonPageObjects common = new CommonPageObjects(driver);
 
+    private EditProfilePageObject editProfilePage = new EditProfilePageObject(driver);
+
     @Before
     public void setup() { common.openApplication(); }
 
@@ -31,6 +35,20 @@ public class EditProfile {
     @Test
     public void tcEditProfileWithValidData() {
         // todo: Exercise - create "main test script" for the valid modification of user's profile
+        for (User user : EditProfileTestData.validUsers) {
+            loginPage.open();
+            loginPage.populateUsername(user.getUsername());
+            loginPage.populatePassword(user.getPassword());
+            loginPage.login();
+
+            common.openEditProfilePage();
+
+            editProfilePage.editProfile(user.getEmail(), user.getName(), user.getPhone(), user.getAddress());
+
+            // do some verification
+
+            common.logout();
+        }
     }
 
     @Test

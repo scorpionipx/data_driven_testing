@@ -11,4 +11,10 @@ public class EditProfilePageObject {
     }
 
     // todo: Exercise - list necessary  page components and actions
+
+    // actions
+
+    public void editProfile(String email, String name, String phone, String address) {
+
+    }
 }
